@@ -8,7 +8,7 @@ A Ruby state machine which allows you to easily add state to Poro and ActiveReco
 
 Add this line to your application's Gemfile:
 ```ruby
-gem 'git.rb'
+gem 'stateful.rb'
 ```
 And then execute:
 ```shell
