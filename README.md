@@ -10,10 +10,12 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'stateful.rb'
 ```
+
 And then execute:
 ```shell
-$ bundle
+$ bundle install
 ```
+
 Or install it yourself as:
 ```shell
 $ gem install stateful.rb
@@ -50,7 +52,7 @@ poro_machine.final_state.name
 # => :final_state
 ```
 
-### 2. Poro with persistence non-specific extend (it just works it out), without a stateful block declaration, an initial_state block, and multiple final states
+### 2. Poro with persistence non-specific extend, without a stateful block declaration, an initial_state block, and multiple final states
 
 ```ruby
 class PoroMachine
@@ -58,7 +60,7 @@ class PoroMachine
 
   initial_state :initial_state do
     on :an_event => :next_state
-    on :another_event => :final_state
+    on :another_event => :final_state0
   end
 
   state :next_state do
@@ -69,14 +71,15 @@ class PoroMachine
 end
 
 poro_machine = PoroMachine.new
-poro_machine.state.name
+poro_machine.current_state.name
 # => :initial_state
 poro_machine.an_event
-poro_machine.state.name
+poro_machine.current_state.name
 # => :next_state
 ```
 
 ### 3. ActiveRecord with persistence-specific extend and a stateful block declaration
+
 ```ruby
 class ActiveRecordMachine < ActiveRecord::Base
   extend Stateful::ActiveRecord
@@ -105,7 +108,7 @@ active_record_machine.next_state?
 # => true
 ```
 
-### 4. ActiveRecord with persistence non-specific extend (it just works it out), without a stateful block declaration, an initial_state block, and multiple final states
+### 4. ActiveRecord with persistence non-specific extend, without a stateful block declaration, an initial_state block, and multiple final states
 
 ```ruby
 class ActiveRecordMachine < ActiveRecord::Base
@@ -113,7 +116,7 @@ class ActiveRecordMachine < ActiveRecord::Base
 
   initial_state :initial_state do
     on :an_event => :next_state
-    on :another_event => :final_state
+    on :another_event => :final_state0
   end
 
   state :next_state do
@@ -133,7 +136,10 @@ active_record_machine.final_state?
 # => true
 ```
 
-### 5. It's also possible to define a state machine (either Poro or ActiveRecord) which has a custom variable (Poro) or column (ActiveRecord) name, which fires off the events in a random or non-deterministic order, and which has no final state
+### 5. Custom variable/column name and non-deterministic event ordering
+
+It's also possible to define a state machine (either Poro or ActiveRecord) which has a custom variable (Poro) or column (ActiveRecord) name, which fires off the events in a random or non-deterministic order, and which has no final state.
+
 ```ruby
 class ActiveRecordMachine < ActiveRecord::Base
 
@@ -169,6 +175,117 @@ active_record_machine.yet_another_event
 active_record_machine.final_state?
 # => false
 ```
+
+### 6. Multiple state machines per class
+
+A single class can have multiple independent (orthogonal) state machines. Each machine gets its own namespaced methods, while domain predicates and event methods remain unnamespaced.
+
+```ruby
+class Order
+  extend Stateful
+
+  state_machine :fulfilment do
+    initial_state :pending do
+      on :items_collected => :ready
+    end
+
+    state :ready do
+      on :dispatch => :dispatched
+    end
+
+    final_state :dispatched
+  end
+
+  state_machine :payment do
+    initial_state :unpaid do
+      on :pay => :paid
+    end
+
+    state :paid do
+      on :refund => :refunded
+    end
+
+    final_state :refunded
+  end
+end
+
+order = Order.new
+
+order.fulfilment_state.name # state accessors are namespaced.
+# => :pending
+order.payment_state.name
+# => :unpaid
+
+order.fulfilment_initial_state? # General/overlapping predicates are namespaced.
+# => true
+order.payment_final_state?
+# => false
+
+order.fulfilment_transitions.first.event_name # Transitions are namespaced.
+# => :items_collected
+
+order.pending? # Domain predicates are not namespaced.
+# => true
+order.unpaid?
+# => true
+
+order.pay # Event methods are not namespaced.
+order.paid?
+# => true
+
+# State machines are orthogonal
+order.fulfilment_initial_state?
+# => true
+```
+
+Multiple state machines can also be declared inside a stateful block:
+
+```ruby
+class Order
+  extend Stateful
+
+  stateful do
+    state_machine :fulfilment do
+      initial_state :pending do
+        on :items_collected => :ready
+      end
+
+      state :ready do
+        on :dispatch => :dispatched
+      end
+
+      final_state :dispatched
+    end
+
+    state_machine :payment do
+      initial_state :unpaid do
+        on :pay => :paid
+      end
+
+      state :paid do
+        on :refund => :refunded
+      end
+
+      final_state :refunded
+    end
+  end
+end
+```
+
+For ActiveRecord, each machine uses a column named `<machine_name>_state`:
+
+```ruby
+class CreateOrders < ActiveRecord::Migration[6.0]
+  def change
+    create_table :orders do |t|
+      t.string :fulfilment_state
+      t.string :payment_state
+    end
+  end
+end
+```
+
+For Poro, each machine uses an instance variable named `@<machine_name>_state`.
 
 ## Contributing
 

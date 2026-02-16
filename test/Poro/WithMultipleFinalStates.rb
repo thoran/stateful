@@ -11,8 +11,7 @@ $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
 require 'Stateful'
 
-class PoroMachine8
-
+class PoroMachine7
   extend Stateful
 
   initial_state :initial_state do
@@ -25,19 +24,17 @@ class PoroMachine8
   end
 
   final_state :final_state0, :final_state1
-
 end
 
 describe Stateful::Poro do
-
-  let(:machine){PoroMachine8.new}
+  let(:machine){PoroMachine7.new}
 
   it "must have an initial state" do
     _(machine.initial_state).wont_be_nil
   end
 
   it "must have a final state (if one has been specified)" do
-    if PoroMachine8.final_state?
+    if PoroMachine7.final_state?
       _(machine.final_state).wont_be_nil
     end
   end
@@ -48,7 +45,7 @@ describe Stateful::Poro do
     end
 
     it "must have an initial state consistent with what is given" do
-      _(machine.initial_state).must_equal PoroMachine8.stateful_states.initial_state
+      _(machine.initial_state).must_equal PoroMachine7.stateful_state_machine.initial_state
     end
 
     it "must have an initial state with name as per the name given" do
@@ -60,8 +57,8 @@ describe Stateful::Poro do
     end
 
     it "must know what it's next state is given an event name" do
-      _(machine.next_state(:an_event)).must_equal PoroMachine8.stateful_states.find(:next_state)
-      _(machine.next_state(:another_event)).must_equal PoroMachine8.stateful_states.find(:final_state0)
+      _(machine.next_state(:an_event)).must_equal PoroMachine7.stateful_state_machine.find(:next_state)
+      _(machine.next_state(:another_event)).must_equal PoroMachine7.stateful_state_machine.find(:final_state0)
     end
 
     it "must have an intial state which has as set of transitions to other states" do
@@ -126,7 +123,7 @@ describe Stateful::Poro do
     end
 
     it "must have a final state consistent with what is given" do
-      _(PoroMachine8.stateful_states.final_states).must_include machine.final_state
+      _(PoroMachine7.stateful_state_machine.final_states).must_include machine.final_state
     end
 
     it "must have a state with name as per the name given" do
@@ -157,7 +154,7 @@ describe Stateful::Poro do
     end
 
     it "must have a final state consistent with what is given" do
-      _(PoroMachine8.stateful_states.final_states).must_include machine.final_state
+      _(PoroMachine7.stateful_state_machine.final_states).must_include machine.final_state
     end
 
     it "must have a state with name as per the name given" do
@@ -176,5 +173,4 @@ describe Stateful::Poro do
       _(machine.active?).must_equal false
     end
   end
-
 end

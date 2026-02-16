@@ -6,25 +6,22 @@ gem 'minitest-spec-context'
 require 'minitest/autorun'
 require 'minitest-spec-context'
 
+require_relative './test_helper'
+
 lib_dir = File.expand_path(File.join(__FILE__, '..', '..', '..', 'lib'))
 $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
-require 'active_record'
-require 'pg'
 require 'Stateful'
 
 class CreateTableMachines < ActiveRecord::Migration[6.0]
-
   def change
-    create_table :active_record_machine8s do |t|
+    create_table :active_record_machine7s do |t|
       t.string :current_state
     end
   end
-
 end
 
-class ActiveRecordMachine8 < ActiveRecord::Base
-
+class ActiveRecordMachine7 < ActiveRecord::Base
   extend Stateful
 
   initial_state :initial_state do
@@ -37,31 +34,19 @@ class ActiveRecordMachine8 < ActiveRecord::Base
   end
 
   final_state :final_state0, :final_state1
-
 end
 
-ActiveRecord::Base.establish_connection(
-  adapter: 'postgresql',
-  host: 'localhost',
-  database: 'test'
-)
-unless ActiveRecord::Base.connection.tables.include?('active_record_machine8s')
-  CreateTableMachines.new.change
-end
-if ActiveRecord::Base.connection.tables.include?('active_record_machine8s')
-  ActiveRecordMachine8.delete_all
-end
+CreateTableMachines.new.change
 
 describe Stateful::ActiveRecord do
-
-  let(:machine){ActiveRecordMachine8.new}
+  let(:machine){ActiveRecordMachine7.new}
 
   it "must have an initial state" do
     _(machine.initial_state).wont_be_nil
   end
 
   it "must have a final state (if one has been specified)" do
-    if ActiveRecordMachine8.final_state?
+    if ActiveRecordMachine7.final_state?
       _(machine.final_state).wont_be_nil
     end
   end
@@ -72,7 +57,7 @@ describe Stateful::ActiveRecord do
     end
 
     it "must have an initial state consistent with what is given" do
-      _(machine.initial_state).must_equal ActiveRecordMachine8.stateful_states.initial_state
+      _(machine.initial_state).must_equal ActiveRecordMachine7.stateful_state_machine.initial_state
     end
 
     it "must have an initial state with name as per the name given" do
@@ -84,8 +69,8 @@ describe Stateful::ActiveRecord do
     end
 
     it "must know what it's next state is given an event name" do
-      _(machine.next_state(:an_event)).must_equal ActiveRecordMachine8.stateful_states.find(:next_state)
-      _(machine.next_state(:another_event)).must_equal ActiveRecordMachine8.stateful_states.find(:final_state0)
+      _(machine.next_state(:an_event)).must_equal ActiveRecordMachine7.stateful_state_machine.find(:next_state)
+      _(machine.next_state(:another_event)).must_equal ActiveRecordMachine7.stateful_state_machine.find(:final_state0)
     end
 
     it "must have an intial state which has as set of transitions to other states" do
@@ -150,7 +135,7 @@ describe Stateful::ActiveRecord do
     end
 
     it "must have a final state consistent with what is given" do
-      _(ActiveRecordMachine8.stateful_states.final_states).must_include machine.final_state
+      _(ActiveRecordMachine7.stateful_state_machine.final_states).must_include machine.final_state
     end
 
     it "must have a state with name as per the name given" do
@@ -181,7 +166,7 @@ describe Stateful::ActiveRecord do
     end
 
     it "must have a final state consistent with what is given" do
-      _(ActiveRecordMachine8.stateful_states.final_states).must_include machine.final_state
+      _(ActiveRecordMachine7.stateful_state_machine.final_states).must_include machine.final_state
     end
 
     it "must have a state with name as per the name given" do
@@ -200,5 +185,4 @@ describe Stateful::ActiveRecord do
       _(machine.active?).must_equal false
     end
   end
-
 end

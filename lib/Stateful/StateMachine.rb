@@ -1,15 +1,20 @@
-# Stateful/States.rb
-# Stateful::States
+# Stateful/StateMachine.rb
+# Stateful::StateMachine
 
 require_relative 'State'
 
 module Stateful
-  class States
+  class StateMachine
 
-    attr_reader :all
+    attr_accessor :options
+    attr_reader(
+      :all,
+      :machine_name
+    )
 
-    def initialize(klass, options = {})
+    def initialize(klass, machine_name: nil, options: {})
       @klass = klass
+      @machine_name = machine_name
       @options = options
       @all = []
       @initial_state = nil
@@ -65,6 +70,7 @@ module Stateful
           final_state = State.new(state_name)
           @final_states << final_state
           all << final_state
+          @klass.define_status_predicate_method(state_name, machine_name: @machine_name)
         end
         @final_states
       else
@@ -77,25 +83,20 @@ module Stateful
       state = find_or_create(state_name, options)
       state.instance_eval(&block) if block
       state.transitions.each do |transition|
-        @klass.define_event_method(transition)
+        @klass.define_event_method(transition, machine_name: @machine_name)
       end
-      @klass.define_status_predicate_method(state_name)
+      @klass.define_status_predicate_method(state_name, machine_name: @machine_name)
       state
-    end
-
-    def stateful(options = {}, &block)
-      @options = options
-      instance_eval(&block) if block
     end
 
     private
 
     def global_non_deterministic_event_ordering?
+      @options ||= {}
       @options[:global_non_deterministic_event_ordering] ||
         @options[:non_deterministic_event_ordering] ||
         @options[:non_deterministic] ||
         (@options.key?(:deterministic) && !@options[:deterministic])
     end
-
   end
 end

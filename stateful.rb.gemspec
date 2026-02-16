@@ -4,7 +4,6 @@ Gem::Specification.new do |spec|
   spec.name = 'stateful.rb' # I would have preferred 'stateful', but there's a gem with the name of stateful already.
 
   spec.version = Stateful::VERSION
-  spec.date = '2026-02-16'
 
   spec.summary = "A Ruby state machine."
   spec.description = "Easily add state to Poro and ActiveRecord objects."
@@ -20,5 +19,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('minitest')
   spec.add_development_dependency('minitest-spec-context')
   spec.add_development_dependency('activerecord')
-  spec.add_development_dependency('pg')
+  spec.add_development_dependency('sqlite3')
 end
