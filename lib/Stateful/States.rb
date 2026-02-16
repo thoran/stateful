@@ -93,8 +93,8 @@ module Stateful
     def global_non_deterministic_event_ordering?
       @options[:global_non_deterministic_event_ordering] ||
         @options[:non_deterministic_event_ordering] ||
-          @options[:non_deterministic] ||
-            (@options[:deterministic] && !@options[:deterministic])
+        @options[:non_deterministic] ||
+        (@options.key?(:deterministic) && !@options[:deterministic])
     end
 
   end

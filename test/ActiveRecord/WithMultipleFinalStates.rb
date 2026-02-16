@@ -1,4 +1,4 @@
-# test/Poro/WithMultipleFinalStates.rb
+# test/ActiveRecord/WithMultipleFinalStates.rb
 
 gem 'minitest'
 gem 'minitest-spec-context'

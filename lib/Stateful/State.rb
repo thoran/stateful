@@ -1,7 +1,6 @@
 # Stateful/State.rb
 # Stateful::State
 
-require_relative File.join('..', 'Array', 'shuffle')
 require_relative 'Transition'
 
 module Stateful
@@ -19,7 +18,7 @@ module Stateful
     def event(event)
       event_name, new_state = event.keys.first, event.values.first
       transitions << Transition.new(event_name, new_state)
-      transitions.shuffle if non_deterministic_event_ordering?
+      transitions.shuffle! if non_deterministic_event_ordering?
       transitions
     end
     alias_method :on, :event
@@ -35,8 +34,7 @@ module Stateful
     def non_deterministic_event_ordering?
       @options[:non_deterministic_event_ordering] ||
         @options[:non_deterministic] ||
-          (@options[:deterministic] && !@options[:deterministic])
+        (@options.key?(:deterministic) && !@options[:deterministic])
     end
-
   end
 end

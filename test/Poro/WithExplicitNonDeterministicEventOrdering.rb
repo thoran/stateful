@@ -74,7 +74,9 @@ describe Stateful::Poro do
     end
 
     it "must know what transitions are available and in what order they are presented" do
-      _(machine.transitions.collect{|t| [t.event_name, t.next_state_name]}).must_equal [[:an_event, :next_state], [:another_event, :final_state]]
+      transition_pairs = machine.transitions.collect{|t| [t.event_name, t.next_state_name]}
+      _(transition_pairs).must_include [:an_event, :next_state]
+      _(transition_pairs).must_include [:another_event, :final_state]
     end
 
     it "must be active" do

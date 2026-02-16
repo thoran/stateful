@@ -1,4 +1,4 @@
-# test/ActiveRecord/WithVariableName.rb
+# test/Poro/WithVariableName.rb
 
 gem 'minitest'
 gem 'minitest-spec-context'

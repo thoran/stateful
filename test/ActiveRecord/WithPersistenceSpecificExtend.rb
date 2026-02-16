@@ -50,7 +50,7 @@ ActiveRecord::Base.establish_connection(
 unless ActiveRecord::Base.connection.tables.include?('active_record_machine2s')
   CreateTableMachines.new.change
 end
-if ActiveRecord::Base.connection.tables.include?('active_record_machine1s')
+if ActiveRecord::Base.connection.tables.include?('active_record_machine2s')
   ActiveRecordMachine2.delete_all
 end
 
