@@ -2,23 +2,36 @@
 
 ## Description
 
-A Ruby state machine which allows you to easily add state to Poro and ActiveRecord objects.
+A Ruby state machine which allows you to easily add state to Poro and ActiveRecord objects. Works with both CRuby and mRuby.
 
 ## Installation
 
+### CRuby
+
 Add this line to your application's Gemfile:
+
 ```ruby
 gem 'stateful.rb'
 ```
 
 And then execute:
+
 ```shell
 $ bundle install
 ```
 
 Or install it yourself as:
+
 ```shell
 $ gem install stateful.rb
+```
+
+### mRuby
+
+Add this to your `build_config.rb`:
+
+```ruby
+conf.gem github: 'thoran/Stateful'
 ```
 
 ## Usage

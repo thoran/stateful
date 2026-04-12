@@ -1,0 +1,8 @@
+20140612:
+* JSON injectable state machine definitions (so as to enable reprogramming of state machines on the fly).
+* Before and after hooks. (Update 20260412: This is now out of scope: Stateful is a pure state machine. Hooks belong in separate library which doesn't yet exist?... Responseful?)
+* Multiple sets of states per class. (Update 20260412: Done as of 2.0.0)
+
+20150117:
+* Print out state machine diagram.
+* Keep record of the most recent past state and then implement a state_changed? method. (This is so as to enable raising of errors if an attempt to change to an improper state is attempted.)

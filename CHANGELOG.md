@@ -1,6 +1,24 @@
-## 2.0.0
-date: 20260216
-summary: Allow multiple state machines per class.
+# stateful/CHANGELOG.md
+
+## 2.1.0 (20260412): Add mRuby support.
+-----------------------------------------------------------------------------------------------------------------------
+
+### +
+1. mrbgem.rake: mrbgem specification with spec.rbfiles pointing at lib/ directly.
+2. mruby/stub\_require\_relative.rb: Stub to silence require_relative calls at mRuby build time.
+3. mruby/smoke_test.rb: Smoke test for mRuby compatibility.
+4. TODO (See notes.txt.)
+
+### -
+1. CHANGELOG.txt as it was left empty after creating CHANGELOG.md.
+2. notes.txt (Now TODO.)
+
+### ~
+1. lib/Stateful.rb: + Object.const_defined?(:ActiveRecord) for mRuby compatibility. In mRuby defined?() raises NameError instead of returning nil as with CRuby.
+2. lib/Stateful/VERSION.rb: /2.0.0/2.1.0/
+
+
+## 2.0.0 (20260216): Allow multiple state machines per class.
 -----------------------------------------------------------------------------------------------------------------------
 
 ### +
@@ -21,12 +39,10 @@ summary: Allow multiple state machines per class.
 4. Test infrastructure migrated from PostgreSQL to SQLite (in-memory)
 5. stateful.rb.gemspec: /pg/sqlite3/
 6. Stateful::StateMachine#final_states: final_state?, final_states? weren't being defined.
+7. lib/Stateful/VERSION.rb: /1.0.2/2.1.0/
 
 
-## 1.0.2
-date: 20260216
-summary: Fix non-deterministic event ordering.
-(aka The 'Don't try to push out changes while the dog is hassling you to take them for a walk!' Edition)
+## 1.0.2 (20260216): Fix non-deterministic event ordering.
 -----------------------------------------------------------------------------------------------------------------------
 
 ### ~
@@ -41,44 +57,44 @@ summary: Fix non-deterministic event ordering.
 9. test/ActiveRecord/WithExplicitNonDeterministicEventOrdering.rb: Same as above.
 10. test/ActiveRecord/WithExplicitGlobalNonDeterministicEventOrdering.rb: Same as above.
 11. test/ActiveRecord/WithExplicitGlobalNonDeterministicEventOrderingAndInitialStateBlock.rb: Same as above.
-12. Stateful::VERSION: /1.0.1/1.0.2/
+12. lib/Stateful/VERSION.rb: /1.0.1/1.0.2/
 
 ### -
 1. Array#shuffle: Use stdlib.
 
-## 1.0.1
-date: 20260216
+
+## 1.0.1 (20260216): Fix date and version.
 -----------------------------------------------------------------------------------------------------------------------
 
 ### ~
 1. stateful.rb.gemspec: Insert the correct date.
-2. Stateful::VERSION: /1.0.0/1.0.1/
+2. lib/Stateful/VERSION.rb: /1.0.0/1.0.1/
 
-## 1.0.0
-date: 20260216
+
+## 1.0.0 (20260216): Version number bump to 1.0.
 -----------------------------------------------------------------------------------------------------------------------
 
 ### ~
-1. Stateful::VERSION: /0.14.12/1.0.0/
+1. lib/Stateful/VERSION.rb: /0.14.12/1.0.0/
 
-## 0.14.12
-date: 20260216
+
+## 0.14.12 (20260216): Change file mode on lib/Array/shuffle.rb.
 -----------------------------------------------------------------------------------------------------------------------
 
 ### ~
 1. lib/Array/shuffle.rb: File mode change to read-only from being executable.
-2. Stateful::VERSION.rb: /0.14.11/0.14.12/
+2. lib/Stateful/VERSION.rb: /0.14.11/0.14.12/
 
-## 0.14.11
-date: 20200419
+
+## 0.14.11 (20200419): Fix copypasta error in README.md.
 -----------------------------------------------------------------------------------------------------------------------
 
 ### ~
 1. README.md: Fixed copypasta error in Installation section (was 'git.rb', now 'stateful.rb')
-2. Stateful::VERSION: /0.14.10/0.14.11/
+2. lib/Stateful/VERSION.rb: /0.14.10/0.14.11/
 
-## 0.14.10
-date: 20150207, 20200331
+
+## 0.14.10 (20150207, 20200331): Allow Poro::ClassMethods to handle its own initialisation when extended.
 -----------------------------------------------------------------------------------------------------------------------
 
 ### +
@@ -88,5 +104,5 @@ date: 20150207, 20200331
 
 ### ~
 1. .gitignore: + *.gem
-2. Stateful::VERSION.rb
+2. lib/Stateful/VERSION.rb: /0.14.9/0.14.10/
 3. stateful.rb.gemspec to reflect the updated version

@@ -6,7 +6,7 @@ module Stateful
   class << self
 
     def extended(klass)
-      if defined?(::ActiveRecord::Base) && klass < ::ActiveRecord::Base
+      if Object.const_defined?(:ActiveRecord) && defined?(::ActiveRecord::Base) && klass < ::ActiveRecord::Base
         require_relative File.join('Stateful', 'ActiveRecord')
         klass.extend(Stateful::ActiveRecord)
       else

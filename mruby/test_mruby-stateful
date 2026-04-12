@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# test_mruby-stateful
+
+dir="$(cd "$(dirname "$0")" && pwd)"
+tmp="$(mktemp)"
+
+cat "$dir/stub_require_relative.rb" $(find "$dir/../lib" -name '*.rb' ! -path '*/ActiveRecord*') "$dir/smoke_tests.rb" > "$tmp"
+mruby "$tmp"
+rm "$tmp"
