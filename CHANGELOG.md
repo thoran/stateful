@@ -1,5 +1,34 @@
 # stateful/CHANGELOG.md
 
+## 2.2.0 (20260418): Add Sequel support.
+-----------------------------------------------------------------------------------------------------------------------
+
+### +
+1. lib/Stateful/Sequel.rb: Sequel adapter module, mirroring Stateful::ActiveRecord.
+2. lib/Stateful/Sequel/ClassMethods.rb: Sequel-specific class methods using self[:column] / self[:column]= for persistence.
+3. test/Sequel/test\_helper.rb: Sequel test helper using in-memory SQLite.
+4. test/Sequel.rb: Sequel test runner.
+5. test/Sequel/WithPersistenceNonSpecificExtend.rb
+6. test/Sequel/WithPersistenceNonSpecificExtendAndStatefulBlock.rb
+7. test/Sequel/WithPersistenceSpecificExtend.rb
+8. test/Sequel/WithPersistenceSpecificExtendAndStatefulBlock.rb
+9. test/Sequel/WithInitialStateBlock.rb
+10. test/Sequel/WithColumnName.rb
+11. test/Sequel/WithMultipleFinalStates.rb
+12. test/Sequel/WithMultipleStateMachines.rb
+13. test/Sequel/WithMultipleStateMachinesAndStatefulBlock.rb
+14. test/Sequel/WithExplicitDeterministicEventOrdering.rb
+15. test/Sequel/WithExplicitNonDeterministicEventOrdering.rb
+16. test/Sequel/WithExplicitGlobalNonDeterministicEventOrdering.rb
+17. test/Sequel/WithExplicitGlobalNonDeterministicEventOrderingAndInitialStateBlock.rb
+
+### ~
+1. lib/Stateful.rb: Auto-detect Sequel::Model in Stateful.extended, between ActiveRecord and Poro.
+2. test/Stateful.rb: + Sequel specs
+3. stateful.rb.gemspec: + sequel dev dependency; update description to include Sequel.
+4. lib/Stateful/VERSION.rb: /2.1.0/2.2.0/
+
+
 ## 2.1.0 (20260412): Add mRuby support.
 -----------------------------------------------------------------------------------------------------------------------
 
