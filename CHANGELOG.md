@@ -1,5 +1,23 @@
 # stateful/CHANGELOG.md
 
+## 2.3.1 (20260418): Use require\_relative in tests.
+-----------------------------------------------------------------------------------------------------------------------
+
+### ~
+1. test/ActiveRecord/\*.rb:
+  - /require 'Stateful'/require\_relative '../../lib/Stateful'/
+  - /require 'Stateful/ActiveRecord'/require\_relative '../../lib/Stateful/ActiveRecord'/
+  (Ensures tests always run against the adjacent lib, not an installed gem.)
+2. test/Poro/\*.rb:
+  - /require 'Stateful'/require\_relative '../../lib/Stateful'/
+  - /require 'Stateful/Poro'/require\_relative '../../lib/Stateful/Poro'/
+3. test/Sequel/\*.rb:
+  - /require 'Stateful'/require\_relative '../../lib/Stateful'/
+  - /require 'Stateful/Sequel'/require\_relative '../../lib/Stateful/Sequel'/
+4. test/Stateful.rb: - $LOAD\_PATH manipulation (no longer needed with require\_relative).
+5. lib/Stateful/VERSION.rb: /2.3.0/2.3.1/
+
+
 ## 2.3.0 (20260418): Extract shared class methods.
 -----------------------------------------------------------------------------------------------------------------------
 

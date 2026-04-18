@@ -8,10 +8,7 @@ require 'minitest-spec-context'
 
 require_relative './test_helper'
 
-lib_dir = File.expand_path(File.join(__FILE__, '..', '..', '..', 'lib'))
-$LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
-
-require 'Stateful/ActiveRecord'
+require_relative '../../lib/Stateful/ActiveRecord'
 
 class CreateTableMachines < ActiveRecord::Migration[6.0]
   def change

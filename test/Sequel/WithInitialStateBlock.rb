@@ -8,10 +8,7 @@ require 'minitest-spec-context'
 
 require_relative './test_helper'
 
-lib_dir = File.expand_path(File.join(__FILE__, '..', '..', '..', 'lib'))
-$LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
-
-require 'Stateful'
+require_relative '../../lib/Stateful'
 
 DB.create_table :sequel_machine4s do
   primary_key :id
