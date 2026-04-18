@@ -1,5 +1,14 @@
 # stateful/CHANGELOG.md
 
+## 2.3.2 (20260418): Add Sequel examples to README.
+-----------------------------------------------------------------------------------------------------------------------
+
+### ~
+1. README.md: + Sequel examples (sections 5 and 6), updated description to include Sequel,
+   renumbered remaining sections.
+2. lib/Stateful/VERSION.rb: /2.3.1/2.3.2/
+
+
 ## 2.3.1 (20260418): Use require\_relative in tests.
 -----------------------------------------------------------------------------------------------------------------------
 

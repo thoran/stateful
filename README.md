@@ -2,7 +2,7 @@
 
 ## Description
 
-A Ruby state machine which allows you to easily add state to Poro and ActiveRecord objects. Works with both CRuby and mRuby.
+A Ruby state machine which allows you to easily add state to Poro, ActiveRecord, and Sequel objects. Works with both CRuby and mRuby.
 
 ## Installation
 
@@ -149,9 +149,67 @@ active_record_machine.final_state?
 # => true
 ```
 
-### 5. Custom variable/column name and non-deterministic event ordering
+### 5. Sequel with persistence-specific extend and a stateful block declaration
 
-It's also possible to define a state machine (either Poro or ActiveRecord) which has a custom variable (Poro) or column (ActiveRecord) name, which fires off the events in a random or non-deterministic order, and which has no final state.
+```ruby
+class SequelMachine < Sequel::Model
+  extend Stateful::Sequel
+
+  stateful do
+    initial_state :initial_state
+
+    state :initial_state do
+      on :an_event => :next_state
+      on :another_event => :final_state
+    end
+
+    state :next_state do
+      on :yet_another_event => :final_state
+    end
+
+    final_state :final_state
+  end
+end
+
+sequel_machine = SequelMachine.create
+sequel_machine.initial_state?
+# => true
+sequel_machine.an_event
+sequel_machine.next_state?
+# => true
+```
+
+### 6. Sequel with persistence non-specific extend, without a stateful block declaration, an initial_state block, and multiple final states
+
+```ruby
+class SequelMachine < Sequel::Model
+  extend Stateful
+
+  initial_state :initial_state do
+    on :an_event => :next_state
+    on :another_event => :final_state0
+  end
+
+  state :next_state do
+    on :yet_another_event => :final_state0
+    on :and_yet_another_event => :final_state1
+  end
+
+  final_state :final_state0, :final_state1
+end
+
+sequel_machine = SequelMachine.create
+sequel_machine.an_event
+sequel_machine.final_state?
+# => false
+sequel_machine.yet_another_event
+sequel_machine.final_state?
+# => true
+```
+
+### 7. Custom attribute name and non-deterministic event ordering
+
+It's also possible to define a state machine which has a custom attribute name, which fires off the events in a random or non-deterministic order, and which has no final state.
 
 ```ruby
 class ActiveRecordMachine < ActiveRecord::Base
@@ -285,7 +343,7 @@ class Order
 end
 ```
 
-For ActiveRecord, each machine uses a column named `<machine_name>_state`:
+For ActiveRecord and Sequel, each machine uses a column named `<machine_name>_state`:
 
 ```ruby
 class CreateOrders < ActiveRecord::Migration[6.0]
