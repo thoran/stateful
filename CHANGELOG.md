@@ -1,5 +1,29 @@
 # stateful/CHANGELOG.md
 
+## 2.3.0 (20260418): Extract shared class methods.
+-----------------------------------------------------------------------------------------------------------------------
+
+### ~
+1. lib/Stateful/ClassMethods.rb: + shared adapter methods extracted from Poro::ClassMethods, ActiveRecord::ClassMethods, Sequel::ClassMethods. All adapters now delegate to stateful\_attribute\_name\_for\_machine.
+  - define\_named\_machine\_methods
+  - define\_event\_method
+  - define\_status\_predicate\_method
+  - define\_next\_state\_method
+  - define\_transitions\_method
+  - define\_initial\_stateQ\_method
+  - define\_final\_stateQ\_method
+2. lib/Stateful/ActiveRecord/ClassMethods.rb:
+  - Extracted shared adapter methods to Stateful::ClassMethods.
+  - /column_name_for_machine/stateful\_attribute_name\_for\_machine/
+3. lib/Stateful/Poro/ClassMethods.rb: Extracted shared adapter methods to Stateful::ClassMethods.
+  - Extracted shared adapter methods to Stateful::ClassMethods.
+  - /variable_name_for_machine/stateful\_attribute_name\_for\_machine/
+4. lib/Stateful/Sequel/ClassMethods.rb: Extracted shared adapter methods to Stateful::ClassMethods.
+  - Extracted shared adapter methods to Stateful::ClassMethods.
+  - /column_name_for_machine/stateful\_attribute_name\_for\_machine/
+5. lib/Stateful/VERSION.rb: /2.2.0/2.3.0/
+
+
 ## 2.2.0 (20260418): Add Sequel support.
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +48,7 @@
 
 ### ~
 1. lib/Stateful.rb: Auto-detect Sequel::Model in Stateful.extended, between ActiveRecord and Poro.
-2. test/Stateful.rb: + Sequel specs
+2. test/Stateful.rb: + Sequel specs; - $LOAD\_PATH.unshift(test\_dir) to avoid case-insensitive collision between test/Sequel.rb and require 'sequel'.
 3. stateful.rb.gemspec: + sequel dev dependency; update description to include Sequel.
 4. lib/Stateful/VERSION.rb: /2.1.0/2.2.0/
 
