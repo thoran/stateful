@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
     'stateful.rb.gemspec',
     'CHANGELOG.md',
     'Gemfile',
+    'LICENSE',
     'README.md',
     Dir['lib/**/*.rb'],
     Dir['test/**/*.rb']

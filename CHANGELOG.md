@@ -1,5 +1,16 @@
 # stateful/CHANGELOG.md
 
+## 2.3.3 (20260822): + LICENSE, and correct the README.
+-----------------------------------------------------------------------------------------------------------------------
+### +
+1. LICENSE: the MIT text, copyright 2014-2026 thoran. The gemspec has declared MIT while the repository carried no licence text at all.
+2. README.md: a License section, saying MIT, last.
+### ~
+1. stateful.rb.gemspec: + 'LICENSE' to spec.files, so the gem carries what the declaration claims.
+2. README.md: /thoran\/Stateful/thoran\/stateful/ in the mruby install line, the repository having been renamed.
+3. README.md: /### 6. Multiple state machines per class/### 8. Multiple state machines per class/, the sequence having run 1 to 7 and then 6 again.
+4. lib/Stateful/VERSION.rb: /2.3.2/2.3.3/
+
 ## 2.3.2 (20260418): Add Sequel examples to README.
 -----------------------------------------------------------------------------------------------------------------------
 

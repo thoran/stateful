@@ -31,7 +31,7 @@ $ gem install stateful.rb
 Add this to your `build_config.rb`:
 
 ```ruby
-conf.gem github: 'thoran/Stateful'
+conf.gem github: 'thoran/stateful'
 ```
 
 ## Usage
@@ -247,7 +247,7 @@ active_record_machine.final_state?
 # => false
 ```
 
-### 6. Multiple state machines per class
+### 8. Multiple state machines per class
 
 A single class can have multiple independent (orthogonal) state machines. Each machine gets its own namespaced methods, while domain predicates and event methods remain unnamespaced.
 
@@ -365,3 +365,8 @@ For Poro, each machine uses an instance variable named `@<machine_name>_state`.
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Create a new pull request
+
+
+## License
+
+MIT
