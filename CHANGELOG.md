@@ -1,5 +1,16 @@
 # stateful/CHANGELOG.md
 
+## 2.3.4 (20260910): ~ lib/Stateful.rb: + require_relative File.join('Stateful', 'VERSION'); + test/VERSION.rb
+----------------------------------------------------------------------------------------------------
+
+### +
+1. test/VERSION.rb: that Stateful::VERSION is a string, that it is three numbers separated by dots, and that it matches the newest entry in the changelog. Modelled on moby's, which is where the convention comes from. The test loads the library rather than VERSION.rb, which is the whole of its value: run against v2.3.3 it fails with "uninitialized constant Stateful::VERSION".
+
+### ~
+1. lib/Stateful.rb: + `require_relative File.join('Stateful', 'VERSION')`. The file has been present and unreached, so `require 'stateful.rb'` left Stateful::VERSION undefined and the gemspec was the only thing loading it.
+2. test/Stateful.rb: + `require_relative 'VERSION'`, the runner globbing only the three persistence directories.
+3. Stateful::VERSION: /2.3.3/2.3.4/
+
 ## 2.3.3 (20260822): + LICENSE, and correct the README.
 -----------------------------------------------------------------------------------------------------------------------
 ### +

@@ -1,6 +1,8 @@
 # Stateful.rb
 # Stateful
 
+require_relative File.join('Stateful', 'VERSION')
+
 module Stateful
 
   class << self
