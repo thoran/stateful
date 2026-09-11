@@ -1,5 +1,12 @@
 # stateful/CHANGELOG.md
 
+## 2.3.6 (20260912): ~ .gitignore: + current default contents
+----------------------------------------------------------------------------------------------------
+
+### ~
+1. .gitignore: 3 lines --> the standard 47, covering gem builds, bundler, RDoc and YARD output, .DS_Store, editor files and coverage output. What was there was *.gem, Gemfile.lock and .claude.
+2. Stateful::VERSION: /2.3.5/2.3.6/
+
 ## 2.3.5 (20260912): ~ the requires: /File.join('a', 'b')/'a\/b'/; - the blank line inside each class and module.
 ----------------------------------------------------------------------------------------------------
 
