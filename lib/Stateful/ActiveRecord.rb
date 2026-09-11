@@ -3,11 +3,10 @@
 
 require_relative 'ClassMethods'
 require_relative 'InstanceMethods'
-require_relative File.join('ActiveRecord', 'ClassMethods')   
+require_relative 'ActiveRecord/ClassMethods'
 
 module Stateful
   module ActiveRecord
-
     class << self
 
       def set_column_name(klass)
@@ -25,6 +24,5 @@ module Stateful
       alias_method :included, :extended
 
     end # class << self
-
   end
 end

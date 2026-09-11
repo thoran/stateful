@@ -5,7 +5,6 @@ require_relative 'Transition'
 
 module Stateful
   class State
-
     attr_accessor :name
     attr_accessor :transitions
 

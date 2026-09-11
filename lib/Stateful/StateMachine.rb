@@ -5,7 +5,6 @@ require_relative 'State'
 
 module Stateful
   class StateMachine
-
     attr_accessor :options
     attr_reader(
       :all,

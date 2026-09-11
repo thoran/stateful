@@ -1,5 +1,13 @@
 # stateful/CHANGELOG.md
 
+## 2.3.5 (20260912): ~ the requires: /File.join('a', 'b')/'a\/b'/; - the blank line inside each class and module.
+----------------------------------------------------------------------------------------------------
+
+### ~
+1. lib and test: 7 requires read `File.join` over two string literals, which returns the same string the literal would: File.join joins with File::SEPARATOR, and that is "/" on every platform Ruby runs on, Windows included, File::ALT_SEPARATOR being untouched by it. So it conferred no portability and cost a `git grep` for the path it names.
+2. lib and test: - 11 blank lines, each immediately after a class or module line and nothing else.
+3. Stateful::VERSION: /2.3.4/2.3.5/
+
 ## 2.3.4 (20260910): ~ lib/Stateful.rb: + require_relative File.join('Stateful', 'VERSION'); + test/VERSION.rb
 ----------------------------------------------------------------------------------------------------
 
