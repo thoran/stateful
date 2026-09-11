@@ -1,9 +1,9 @@
 # Stateful/Sequel.rb
 # Stateful::Sequel
 
-require_relative 'ClassMethods'
-require_relative 'InstanceMethods'
-require_relative 'Sequel/ClassMethods'
+require_relative './ClassMethods'
+require_relative './InstanceMethods'
+require_relative './Sequel/ClassMethods'
 
 module Stateful
   module Sequel
@@ -22,7 +22,6 @@ module Stateful
         klass.extend(Stateful::Sequel::ClassMethods)
       end
       alias_method :included, :extended
-
     end # class << self
   end
 end

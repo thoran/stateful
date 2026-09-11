@@ -11,4 +11,4 @@ poro_specs.each{|spec| require spec}
 sequel_specs = Dir[File.join(test_dir, 'Sequel', '**', '*.rb')]
 sequel_specs.each{|spec| require spec}
 
-require_relative 'VERSION'
+require_relative './VERSION'

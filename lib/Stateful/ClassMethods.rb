@@ -1,7 +1,7 @@
 # Stateful/ClassMethods.rb
 # Stateful::ClassMethods
 
-require_relative 'StateMachine'
+require_relative './StateMachine'
 
 module Stateful
   module ClassMethods

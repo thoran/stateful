@@ -1,7 +1,7 @@
 # Stateful/StateMachine.rb
 # Stateful::StateMachine
 
-require_relative 'State'
+require_relative './State'
 
 module Stateful
   class StateMachine

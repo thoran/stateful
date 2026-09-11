@@ -1,5 +1,12 @@
 # stateful/CHANGELOG.md
 
+## 2.3.7 (20260912): ~ the requires: /'a\/b'/'.\/a\/b'/
+----------------------------------------------------------------------------------------------------
+
+### ~
+1. lib and test: 17 require_relative lines gain the ./ prefix. The estate writes it that way in 160 of its 210 require_relative lines and in 22 of its 28 repositories, and this repository was one of the six which did not. The two forms resolve identically, require_relative reading the path against the calling file's directory either way.
+2. Stateful::VERSION: /2.3.6/2.3.7/
+
 ## 2.3.6 (20260912): ~ .gitignore: + current default contents
 ----------------------------------------------------------------------------------------------------
 

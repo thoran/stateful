@@ -1,9 +1,9 @@
 # Stateful/Poro.rb
 # Stateful::Poro
 
-require_relative 'ClassMethods'
-require_relative 'InstanceMethods'
-require_relative 'Poro/ClassMethods'
+require_relative './ClassMethods'
+require_relative './InstanceMethods'
+require_relative './Poro/ClassMethods'
 
 module Stateful
   module Poro

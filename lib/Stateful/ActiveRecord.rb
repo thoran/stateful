@@ -1,9 +1,9 @@
 # Stateful/ActiveRecord.rb
 # Stateful::ActiveRecord
 
-require_relative 'ClassMethods'
-require_relative 'InstanceMethods'
-require_relative 'ActiveRecord/ClassMethods'
+require_relative './ClassMethods'
+require_relative './InstanceMethods'
+require_relative './ActiveRecord/ClassMethods'
 
 module Stateful
   module ActiveRecord
