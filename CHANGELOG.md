@@ -1,6 +1,14 @@
 # stateful/CHANGELOG.md
 
-## 2.3.7 (20260912): ~ the requires: /'a\/b'/'.\/a\/b'/
+## 2.4.0 (20260912): lib/Stateful.rb --> lib/stateful.rb
+----------------------------------------------------------------------------------------------------
+
+### ~
+1. lib/Stateful.rb --> lib/stateful.rb
+2. test: /..\/lib\/Stateful\/..\/lib/stateful\/
+3. Stateful::VERSION: /2.3.7/2.4.0/
+
+## 2.3.7 (20260912): ~ the requires: /'a\/b'/'.\/a\/b'/; - the blank line above each closing end.
 ----------------------------------------------------------------------------------------------------
 
 ### ~

@@ -5,7 +5,7 @@ gem 'minitest-spec-context'
 
 require 'minitest/autorun'
 require 'minitest-spec-context'
-require_relative '../../lib/Stateful'
+require_relative '../../lib/stateful'
 
 class PoroMachine9
   extend Stateful

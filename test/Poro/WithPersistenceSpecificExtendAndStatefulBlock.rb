@@ -5,7 +5,7 @@ gem 'minitest-spec-context'
 
 require 'minitest/autorun'
 require 'minitest-spec-context'
-require_relative '../../lib/Stateful/Poro'
+require_relative '../../lib/stateful/Poro'
 
 class PoroMachine3
   extend Stateful::Poro

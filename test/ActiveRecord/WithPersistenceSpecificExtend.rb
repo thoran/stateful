@@ -8,7 +8,7 @@ require 'minitest-spec-context'
 
 require_relative './test_helper'
 
-require_relative '../../lib/Stateful/ActiveRecord'
+require_relative '../../lib/stateful/ActiveRecord'
 
 class CreateTableMachines < ActiveRecord::Migration[6.0]
   def change
