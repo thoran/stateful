@@ -19,7 +19,7 @@ describe Stateful do
 
     it "matches the newest entry in the CHANGELOG" do
       changelog = File.read(File.expand_path('../CHANGELOG.md', __dir__))
-      _(changelog[/^## (\d+\.\d+\.\d+) \(/, 1]).must_equal Stateful::VERSION
+      _(changelog[/^(\d+\.\d+\.\d+):/, 1]).must_equal Stateful::VERSION
     end
   end
 end
