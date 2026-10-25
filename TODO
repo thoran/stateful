@@ -5,4 +5,4 @@
 
 20150117:
 * Print out state machine diagram.
-* Keep record of the most recent past state and then implement a state_changed? method. (This is so as to enable raising of errors if an attempt to change to an improper state is attempted.)
+* Keep record of the most recent past state and then implement a state_changed? method. (This is so as to enable raising of errors if an attempt to change to an improper state is attempted.) (Update 20261025: An event with no transition from the current state raises Stateful::InvalidTransition as of 2.5.0.)

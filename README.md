@@ -358,6 +358,42 @@ end
 
 For Poro, each machine uses an instance variable named `@<machine_name>_state`.
 
+### 9. Events with no transition from the current state
+
+An event which the current state has no transition for raises `Stateful::InvalidTransition`, a `StandardError`, and leaves the state as it was. The error carries `event_name` and `state_name`.
+
+```ruby
+class Connection
+  extend Stateful
+
+  initial_state :unstarted do
+    on :start => :connecting
+  end
+
+  state :connecting do
+    on :handshake_ok => :open
+  end
+
+  final_state :open
+end
+
+connection = Connection.new
+connection.start
+connection.handshake_ok
+
+connection.start
+# => Stateful::InvalidTransition: no transition for :start from :open
+connection.current_state.name
+# => :open
+```
+
+To ask first, `next_state` returns nil for such an event:
+
+```ruby
+connection.next_state(:start)
+# => nil
+```
+
 ## Contributing
 
 1. Fork it: https://github.com/thoran/stateful/fork

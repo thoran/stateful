@@ -1,6 +1,7 @@
 # Stateful/ClassMethods.rb
 # Stateful::ClassMethods
 
+require_relative './InvalidTransition'
 require_relative './StateMachine'
 
 module Stateful
@@ -65,7 +66,9 @@ module Stateful
     def define_event_method(transition, machine_name: nil)
       attribute_name = stateful_attribute_name_for_machine(machine_name)
       define_method(transition.event_name) do
-        next_state_name = self.send(attribute_name).next_state_name(transition.event_name)
+        current_state = self.send(attribute_name)
+        next_state_name = current_state.next_state_name(transition.event_name)
+        raise Stateful::InvalidTransition.new(transition.event_name, current_state.name) unless next_state_name
         next_state = self.class.stateful_state_machine(machine_name).find(next_state_name)
         self.send("#{attribute_name}=", next_state)
       end

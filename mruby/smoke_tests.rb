@@ -206,6 +206,40 @@ job.finish
 assert("status reflects final state"){job.status.name == :done}
 assert("final_state? works with custom variable"){job.final_state?}
 
+# --- 6. Invalid transitions ---
+
+puts
+puts "6. Invalid transitions"
+
+class Connection
+  extend Stateful
+
+  initial_state :unstarted do
+    on :start => :connecting
+  end
+
+  state :connecting do
+    on :handshake_ok => :open
+  end
+
+  final_state :open
+end
+
+connection = Connection.new
+connection.start
+connection.handshake_ok
+
+error = begin
+  connection.start
+  nil
+rescue Stateful::InvalidTransition => e
+  e
+end
+assert("event with no transition raises Stateful::InvalidTransition"){error.is_a?(Stateful::InvalidTransition)}
+assert("Stateful::InvalidTransition is a StandardError"){error.is_a?(StandardError)}
+assert("error names the event and the state"){error.message == "no transition for :start from :open"}
+assert("state is unchanged"){connection.current_state.name == :open}
+
 # --- Summary ---
 
 puts

@@ -2,6 +2,17 @@
 
 ## 20261025
 
+2.5.0: Raise Stateful::InvalidTransition for an event with no transition from the current state.
+
+1. + lib/Stateful/InvalidTransition.rb: Stateful::InvalidTransition, a StandardError carrying event_name and state_name.
+2. + test/Poro/WithInvalidEvent.rb, test/ActiveRecord/WithInvalidEvent.rb, test/Sequel/WithInvalidEvent.rb: an event with no transition, from a non-final state, from a final state and in a named machine, raises Stateful::InvalidTransition and leaves the state, persisted or not, as it was.
+3. ~ Stateful::ClassMethods#define_event_method: the event method raises Stateful::InvalidTransition where the current state has no transition for the event. On Poro the state returned to the initial state, and on ActiveRecord and Sequel the attribute setter raised NoMethodError.
+4. ~ lib/Stateful/ClassMethods.rb: + require_relative './InvalidTransition'
+5. ~ mruby/smoke_tests.rb: + 6. Invalid transitions.
+6. ~ README.md: + 9. Events with no transition from the current state.
+7. ~ TODO: the 20150117 item on raising errors for improper state changes notes 2.5.0.
+8. ~ Stateful::VERSION: /2.4.2/2.5.0/
+
 2.4.2: Rewrite the CHANGELOG in the form changelogger writes.
 
 1. ~ CHANGELOG.md: a `## YYYYMMDD` heading per day, under which each release is `x.y.z: summary` followed by numbered items each marked +, - or ~, in place of a heading per release and a section per kind of change; `\_` and `\*` lose their backslashes. 0.14.10, dated 20150207 and 20200331, goes under 20200331, its release.
