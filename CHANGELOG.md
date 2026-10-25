@@ -1,5 +1,13 @@
 # stateful/CHANGELOG.md
 
+## 2.4.1 (20261025): ~ test: /lib\/stateful\//lib\/Stateful\// where it names the directory, for case-sensitive filesystems; ~ README.md: /thoran\/Stateful/thoran\/stateful/ in the fork link.
+----------------------------------------------------------------------------------------------------
+
+### ~
+1. test/Poro, test/ActiveRecord and test/Sequel: WithPersistenceSpecificExtend.rb and WithPersistenceSpecificExtendAndStatefulBlock.rb: /'..\/..\/lib\/stateful\/'/'..\/..\/lib\/Stateful\/'/. 2.4.0 lowercased the directory along with lib/Stateful.rb, and lib/stateful/ is found only where the filesystem ignores case.
+2. README.md: /thoran\/Stateful/thoran\/stateful/ in the Contributing fork link, the repository having been renamed.
+3. Stateful::VERSION: /2.4.0/2.4.1/
+
 ## 2.4.0 (20260912): lib/Stateful.rb --> lib/stateful.rb
 ----------------------------------------------------------------------------------------------------
 

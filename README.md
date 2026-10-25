@@ -360,7 +360,7 @@ For Poro, each machine uses an instance variable named `@<machine_name>_state`.
 
 ## Contributing
 
-1. Fork it: https://github.com/thoran/Stateful/fork
+1. Fork it: https://github.com/thoran/stateful/fork
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`

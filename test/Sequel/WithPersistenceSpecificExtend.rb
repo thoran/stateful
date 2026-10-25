@@ -8,7 +8,7 @@ require 'minitest-spec-context'
 
 require_relative './test_helper'
 
-require_relative '../../lib/stateful/Sequel'
+require_relative '../../lib/Stateful/Sequel'
 
 DB.create_table :sequel_machine2s do
   primary_key :id
